@@ -3,6 +3,7 @@ CREATE TABLE `member`
     `id`         BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
     `name`       VARCHAR(255)    NOT NULL,
     `email`      VARCHAR(255)    NOT NULL,
+    `role`       VARCHAR(50)     NOT NULL,
     `created_at` TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
     `deleted_at` TIMESTAMP       NULL,
     PRIMARY KEY (`id`),
@@ -17,7 +18,7 @@ CREATE TABLE `member_oauth_account`
     `provider`         VARCHAR(20)     NOT NULL,
     `provider_user_id` VARCHAR(100)    NOT NULL,
     `email`            VARCHAR(255)    NOT NULL,
-    `refresh_token`    VARCHAR(255)    NOT NULL,
+    `refresh_token`    VARCHAR(255),
     `created_at`       DATETIME(6)     NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
 
     PRIMARY KEY (`id`),
