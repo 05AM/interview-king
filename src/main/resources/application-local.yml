@@ -1,0 +1,46 @@
+spring:
+  config:
+    import: classpath:api-secret.properties
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+
+  sql:
+    init:
+      mode: embedded
+
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
+
+jwt:
+  secret-key: your-very-secure-and-long-secret-key-for-hs256-signing
+  access-expiration-time: 1800000       # 30분
+  refresh-expiration-time: 604800000    # 1주
+
+oauth:
+  client:
+    google:
+      credentials:
+        client-id: ${GOOGLE_OAUTH_CLIENT_ID}
+        client-secret: ${GOOGLE_OAUTH_CLIENT_SECRET}
+        redirect-uri: http://localhost:8080/oauth/callback
+      provider:
+        uri:
+          user-info: https://www.googleapis.com/oauth2/v2/userinfo
+          token: https://oauth2.googleapis.com/token
