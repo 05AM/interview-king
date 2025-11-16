@@ -44,3 +44,14 @@ oauth:
         uri:
           user-info: https://www.googleapis.com/oauth2/v2/userinfo
           token: https://oauth2.googleapis.com/token
+
+openai:
+  api-key: ${OPENAI_API_KEY}
+  base-url: https://api.openai.com/v1
+  model: gpt-5-mini
+
+classpath:
+  prompt:
+    interview:
+      system: "prompts/interview_system_prompt.txt"
+      user: "prompts/interview_user_prompt.txt"
