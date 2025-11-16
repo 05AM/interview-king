@@ -2,9 +2,9 @@ package org.example.interviewking.api.qna.domain.question;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Builder;
 
 @Getter
 @Entity
@@ -17,6 +17,7 @@ import lombok.Builder;
         )
     }
 )
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Keyword {
 
@@ -27,8 +28,11 @@ public class Keyword {
     @Column(nullable = false, length = 255)
     private String name;
 
-    @Builder
     private Keyword(String name) {
         this.name = name;
+    }
+
+    public static Keyword create(String name) {
+        return new Keyword(name);
     }
 }

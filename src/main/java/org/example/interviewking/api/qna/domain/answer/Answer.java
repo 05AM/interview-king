@@ -1,6 +1,9 @@
 package org.example.interviewking.api.qna.domain.answer;
 
-import org.example.interviewking.api.common.domain.BaseCreatedAtEntity;
+import java.util.List;
+
+import org.example.interviewking.api.common.domain.converter.StringListConverter;
+import org.example.interviewking.api.common.domain.entity.BaseCreatedAtEntity;
 import org.example.interviewking.api.qna.domain.question.Question;
 
 import jakarta.persistence.*;
@@ -22,22 +25,33 @@ public class Answer extends BaseCreatedAtEntity {
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
-    @Column(name = "comment", nullable = false)
-    private String comment;
-
     @Column(name = "my_answer", nullable = false)
     private String myAnswer;
 
     @Column(name = "pros", nullable = false)
-    private String pros;
+    @Convert(converter = StringListConverter.class)
+    private List<String> pros;
 
     @Column(name = "cons", nullable = false)
-    private String cons;
+    @Convert(converter = StringListConverter.class)
+    private List<String> cons;
 
-    @Column(nullable = false)
-    private int score;
+    @Embedded
+    private AnswerScore score;
 
-    // TODO: 나중에 enum으로 바꾸기
-    @Column(nullable = false, length = 20)
-    private String grade;
+    @Column(name = "comment", nullable = false)
+    private String comment;
+
+    public Answer(Question question, String myAnswer, List<String> pros, List<String> cons, String comment, AnswerScore score) {
+        this.question = question;
+        this.myAnswer = myAnswer;
+        this.pros = pros;
+        this.cons = cons;
+        this.comment = comment;
+        this.score = score;
+    }
+
+    public static Answer create(Question question, String myAnswer, List<String> pros, List<String> cons, String comment, AnswerScore score) {
+        return new Answer(question, myAnswer, pros, cons, comment, score);
+    }
 }

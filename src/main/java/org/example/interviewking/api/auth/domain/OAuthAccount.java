@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import org.example.interviewking.api.auth.model.OAuthProvider;
-import org.example.interviewking.api.common.domain.BaseCreatedAtEntity;
+import org.example.interviewking.api.common.domain.entity.BaseCreatedAtEntity;
 import org.example.interviewking.api.member.domain.Member;
 
 @Getter
@@ -32,11 +32,7 @@ public class OAuthAccount extends BaseCreatedAtEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(
-        name = "member_id",
-        nullable = false,
-        foreignKey = @ForeignKey(name = "fk_member_oauth_account_member")
-    )
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
 
     @Column(nullable = false, length = 20)

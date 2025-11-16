@@ -48,9 +48,10 @@ CREATE TABLE `question`
     `category_id`      BIGINT UNSIGNED NOT NULL,
     `member_id`        BIGINT UNSIGNED NOT NULL,
     `text`             VARCHAR(255)    NOT NULL,
-    `model_answer`     TEXT            NOT NULL,
+    `model_answer`     TEXT            NULL,
+    `status`           VARCHAR(20)     NOT NULL,
     `created_at`       TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    `last_answered_at` TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    `last_answered_at` TIMESTAMP                DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     PRIMARY KEY (`id`),
 
@@ -58,20 +59,27 @@ CREATE TABLE `question`
         FOREIGN KEY (`member_id`) REFERENCES `member` (`id`),
 
     CONSTRAINT `question_category_id_foreign`
-        FOREIGN KEY (`category_id`) REFERENCES `question_category` (`id`)
+        FOREIGN KEY (`category_id`) REFERENCES `question_category` (`id`),
+
+    CONSTRAINT `question_member_id_text_unique`
+        UNIQUE (`member_id`, `text`)
 );
 
 CREATE TABLE `answer`
 (
-    `id`          BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-    `question_id` BIGINT UNSIGNED NOT NULL,
-    `comment`     VARCHAR(500)    NOT NULL,
-    `my_answer`   TEXT            NOT NULL,
-    `pros`        TEXT            NOT NULL,
-    `cons`        TEXT            NOT NULL,
-    `score`       INT             NOT NULL,
-    `grade`       VARCHAR(20)     NOT NULL,
-    `created_at`  TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `id`           BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `question_id`  BIGINT UNSIGNED NOT NULL,
+    `comment`      VARCHAR(500)    NOT NULL,
+    `my_answer`    TEXT            NOT NULL,
+    `pros`         TEXT            NOT NULL,
+    `cons`         TEXT            NOT NULL,
+    `score`        INT             NOT NULL,
+    `logic_score`  INT             NOT NULL,
+    `accuracy`     INT             NOT NULL,
+    `structure`    INT             NOT NULL,
+    `practicality` INT             NOT NULL,
+    `grade`        VARCHAR(20)     NOT NULL,
+    `created_at`   TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     PRIMARY KEY (`id`),
 
@@ -138,3 +146,25 @@ CREATE TABLE `member_keyword_stat`
     CONSTRAINT `uk_member_keyword_stat_member_keyword`
         UNIQUE (`member_id`, `keyword_id`)
 );
+
+
+-- initial data
+
+-- question category
+INSERT IGNORE INTO question_category (name)
+VALUES ('OS'),
+       ('Network'),
+       ('DB'),
+       ('Data Structure'),
+       ('Algorithm'),
+       ('Language'),
+       ('Framework'),
+       ('ETC');
+
+-- member
+INSERT IGNORE INTO member (id, name, email, role, created_at, deleted_at)
+VALUES (1, '이찬미', 'anytime0224@gmail.com', 'MEMBER', '2025-11-17 00:10:49.973282', NULL);
+
+INSERT IGNORE INTO member_oauth_account
+(id, member_id, provider, provider_user_id, email, refresh_token, created_at)
+VALUES (1, 1, 'GOOGLE', '105629262426510504275', 'anytime0224@gmail.com', NULL, '2025-11-17 00:10:50.046084');

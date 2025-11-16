@@ -1,5 +1,7 @@
 package org.example.interviewking.api.qna.domain.question;
 
+import org.example.interviewking.api.common.domain.entity.BaseCreatedAtEntity;
+
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -10,7 +12,7 @@ import lombok.Builder;
 @Entity
 @Table(name = "question_tag")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class QuestionTag {
+public class QuestionTag extends BaseCreatedAtEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,5 +29,14 @@ public class QuestionTag {
     private QuestionTag(Question question, String name) {
         this.question = question;
         this.name = name;
+    }
+
+    private QuestionTag(String name, Question question) {
+        this.name = name;
+        this.question = question;
+    }
+
+    public static QuestionTag create(String name, Question question) {
+        return new QuestionTag(name, question);
     }
 }
