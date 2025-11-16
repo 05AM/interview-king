@@ -25,15 +25,12 @@ public class Answer extends BaseCreatedAtEntity {
     @Column(name = "comment", nullable = false)
     private String comment;
 
-    @Lob
     @Column(name = "my_answer", nullable = false)
     private String myAnswer;
 
-    @Lob
     @Column(name = "pros", nullable = false)
     private String pros;
 
-    @Lob
     @Column(name = "cons", nullable = false)
     private String cons;
 

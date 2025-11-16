@@ -46,8 +46,11 @@ public class OAuthService {
         Member member = memberRepository.findByEmail(userInfo.email())
             .orElseGet(() -> memberService.create(userInfo.email(), userInfo.name()));
 
-        OAuthAccount oAuthAccount = OAuthAccount.create(member, provider, userInfo.id(), userInfo.email(), tokenInfo.refreshToken());
-        oAuthRepository.save(oAuthAccount);
+        // 존재하지 않으면 새로운 OAuth 계정 정보 생성
+        oAuthRepository.findByMember(member)
+            .orElseGet(() -> oAuthRepository.save(
+                OAuthAccount.create(member, provider, userInfo.id(), userInfo.email(), tokenInfo.refreshToken())
+            ));
 
         String accessToken = jwtProvider.createAccessToken(member.getId(), member.getRole());
         String refreshToken = jwtProvider.createRefreshToken(member.getId());

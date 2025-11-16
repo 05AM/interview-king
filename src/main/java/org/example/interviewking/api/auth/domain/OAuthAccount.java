@@ -49,7 +49,7 @@ public class OAuthAccount extends BaseCreatedAtEntity {
     @Column(name = "email", nullable = false)
     private String email;
 
-    @Column(name = "refresh_token", nullable = false)
+    @Column(name = "refresh_token")
     private String refreshToken;
 
     public static OAuthAccount create(Member member, OAuthProvider provider, String providerUserId, String email, String refreshToken) {
