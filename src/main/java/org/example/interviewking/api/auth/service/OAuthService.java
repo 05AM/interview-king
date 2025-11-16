@@ -2,6 +2,8 @@ package org.example.interviewking.api.auth.service;
 
 import java.util.List;
 
+import org.example.interviewking.api.auth.domain.OAuthAccount;
+import org.example.interviewking.api.auth.domain.OAuthRepository;
 import org.example.interviewking.api.auth.domain.exception.UnsupportedOAuthProviderException;
 import org.example.interviewking.api.auth.dto.OAuthTokenInfo;
 import org.example.interviewking.api.auth.dto.OAuthUserInfo;
@@ -26,7 +28,9 @@ public class OAuthService {
 
     private final MemberService memberService;
     private final JwtProvider jwtProvider;
+
     private final MemberRepository memberRepository;
+    private final OAuthRepository oAuthRepository;
 
     public TokenInfoDto login(OAuthProvider provider, String code) {
         OAuthClient client = clients.stream()
@@ -41,6 +45,9 @@ public class OAuthService {
         // 존재하지 않으면 새 멤버 생성
         Member member = memberRepository.findByEmail(userInfo.email())
             .orElseGet(() -> memberService.create(userInfo.email(), userInfo.name()));
+
+        OAuthAccount oAuthAccount = OAuthAccount.create(member, provider, userInfo.id(), userInfo.email(), tokenInfo.refreshToken());
+        oAuthRepository.save(oAuthAccount);
 
         String accessToken = jwtProvider.createAccessToken(member.getId(), member.getRole());
         String refreshToken = jwtProvider.createRefreshToken(member.getId());
