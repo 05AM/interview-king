@@ -2,10 +2,10 @@ spring:
   config:
     import: classpath:api-secret.properties
   datasource:
-    url: jdbc:h2:mem:testdb;MODE=MySQL;DATABASE_TO_LOWER=TRUE;CASE_INSENSITIVE_IDENTIFIERS=TRUE
+    url: jdbc:mysql://localhost:3306/interviewking?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
     username: root
     password: 1234
-    driver-class-name: org.h2.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
     hibernate:
@@ -14,6 +14,7 @@ spring:
       hibernate:
         show_sql: false
         format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
 
   sql:
     init:
@@ -30,8 +31,8 @@ logging:
 
 jwt:
   secret-key: your-very-secure-and-long-secret-key-for-hs256-signing
-#  access-expiration-time: 1800000       # 30분
-  access-expiration-time: 604800000       # 30분
+  #  access-expiration-time: 1800000       # 30분
+  access-expiration-time: 604800000
   refresh-expiration-time: 604800000    # 1주
 
 oauth:
@@ -49,7 +50,8 @@ oauth:
 openai:
   api-key: ${OPENAI_API_KEY}
   base-url: https://api.openai.com/v1
-  model: gpt-5-mini
+  model: gpt-5.1
+#  model: gpt-5-mini
 
 classpath:
   prompt:
