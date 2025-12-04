@@ -6,7 +6,6 @@ import org.example.interviewking.api.common.security.model.LoginMember;
 import org.example.interviewking.api.qna.controller.dto.QuestionDetailResDto;
 import org.example.interviewking.api.qna.controller.dto.QuestionsResDto;
 import org.example.interviewking.api.qna.service.QuestionQueryService;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;

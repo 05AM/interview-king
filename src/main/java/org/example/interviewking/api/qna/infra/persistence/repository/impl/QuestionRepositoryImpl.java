@@ -29,7 +29,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
     @Override
     public Page<Question> findAllByMemberId(Long memberId, Pageable pageable) {
-        return questionJpaRepository.findAll(pageable);
+        return questionJpaRepository.findAllByMemberIdOrderByCreatedAtDesc(memberId, pageable);
     }
 
     @Override

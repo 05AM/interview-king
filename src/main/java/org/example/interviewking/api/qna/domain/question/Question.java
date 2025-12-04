@@ -71,8 +71,11 @@ public class Question extends BaseCreatedAtEntity {
 
     public void complete(String modelAnswer, List<QuestionKeyword> keywords, List<QuestionTag> tags) {
         this.modelAnswer = modelAnswer;
-        this.keywords = keywords;
-        this.tags = tags;
         this.status = QuestionStatus.COMPLETED;
+
+        this.keywords.clear();
+        this.keywords.addAll(keywords);
+        this.tags.clear();
+        this.tags.addAll(tags);
     }
 }

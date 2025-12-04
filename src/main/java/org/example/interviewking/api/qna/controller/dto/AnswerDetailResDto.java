@@ -1,5 +1,6 @@
 package org.example.interviewking.api.qna.controller.dto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.example.interviewking.api.qna.domain.answer.Answer;
@@ -12,6 +13,7 @@ public record AnswerDetailResDto(
     List<String> pros,
     List<String> cons,
     String comment,
+    LocalDateTime createdAt,
     Score score
 ) {
     public record Score(
@@ -33,6 +35,7 @@ public record AnswerDetailResDto(
             answer.getPros(),
             answer.getCons(),
             answer.getComment(),
+            answer.getCreatedAt(),
             new AnswerDetailResDto.Score(
                 score.getTotalScore(),
                 score.getLogicScore(),

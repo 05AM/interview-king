@@ -1,5 +1,7 @@
 package org.example.interviewking.api.qna.service;
 
+import java.util.Comparator;
+
 import org.example.interviewking.api.common.dto.PageInfoResDto;
 import org.example.interviewking.api.common.exception.NotFoundException;
 import org.example.interviewking.api.qna.controller.dto.AnswerDetailResDto;
@@ -44,6 +46,7 @@ public class QuestionQueryService {
             QuestionResDto.toDto(question),
             question.getAnswers().stream()
                 .map(AnswerDetailResDto::toDto)
+                .sorted(Comparator.comparing(AnswerDetailResDto::createdAt).reversed())
                 .toList()
         );
     }

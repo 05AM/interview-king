@@ -61,14 +61,13 @@ public class QNAService {
 
             List<QuestionKeyword> keywords = keywordMap.entrySet().stream()
                 .map(entry -> QuestionKeyword.create(entry.getKey(), entry.getValue(), question))
-                .toList();
-
+                .collect(Collectors.toList());
             questionKeywordService.createAll(keywords);
 
             // 태그 저장
             List<QuestionTag> tags = evaluated.tags().stream()
                 .map(tag -> QuestionTag.create(tag, question))
-                .toList();
+                .collect(Collectors.toList());
             tagService.createAll(tags);
 
             // 모범 답안 저장
