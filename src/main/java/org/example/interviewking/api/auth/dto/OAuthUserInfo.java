@@ -1,6 +1,6 @@
 package org.example.interviewking.api.auth.dto;
 
-import org.example.interviewking.api.auth.model.OAuthProvider;
+import org.example.interviewking.api.auth.domain.OAuthProvider;
 
 public interface OAuthUserInfo {
 

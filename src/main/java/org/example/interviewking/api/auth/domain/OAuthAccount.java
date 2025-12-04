@@ -3,7 +3,6 @@ package org.example.interviewking.api.auth.domain;
 import jakarta.persistence.*;
 import lombok.*;
 
-import org.example.interviewking.api.auth.model.OAuthProvider;
 import org.example.interviewking.api.common.domain.entity.BaseCreatedAtEntity;
 import org.example.interviewking.api.member.domain.Member;
 

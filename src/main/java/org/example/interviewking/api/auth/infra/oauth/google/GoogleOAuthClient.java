@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 import org.example.interviewking.api.auth.dto.OAuthTokenInfo;
 import org.example.interviewking.api.auth.dto.OAuthUserInfo;
 import org.example.interviewking.api.auth.infra.oauth.exception.OAuthClientException;
-import org.example.interviewking.api.auth.model.OAuthProvider;
+import org.example.interviewking.api.auth.domain.OAuthProvider;
 import org.example.interviewking.api.auth.port.out.OAuthClient;
 import org.example.interviewking.api.common.model.ResponseCode;
 import org.springframework.http.HttpStatusCode;

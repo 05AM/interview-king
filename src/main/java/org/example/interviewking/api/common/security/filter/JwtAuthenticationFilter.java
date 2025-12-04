@@ -60,12 +60,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     private String resolveToken(HttpServletRequest request) {
-        String bearer = request.getHeader(AuthConstants.AUTH_HEADER);
-        if (bearer == null) {
-            return null;
-        }
-        if (bearer.startsWith(AuthConstants.BEARER_PREFIX)) {
-            return bearer.substring(7);
+        String token = request.getHeader("Authorization");
+
+        if (token != null && token.startsWith(AuthConstants.BEARER_PREFIX)) {
+            return token.substring(7);
         }
         return null;
     }

@@ -7,7 +7,7 @@ import org.example.interviewking.api.auth.domain.OAuthRepository;
 import org.example.interviewking.api.auth.domain.exception.UnsupportedOAuthProviderException;
 import org.example.interviewking.api.auth.dto.OAuthTokenInfo;
 import org.example.interviewking.api.auth.dto.OAuthUserInfo;
-import org.example.interviewking.api.auth.model.OAuthProvider;
+import org.example.interviewking.api.auth.domain.OAuthProvider;
 import org.example.interviewking.api.auth.port.out.OAuthClient;
 import org.example.interviewking.api.auth.service.dto.TokenInfoDto;
 import org.example.interviewking.api.auth.util.JwtProvider;

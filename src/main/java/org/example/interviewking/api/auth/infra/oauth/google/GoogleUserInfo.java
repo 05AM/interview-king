@@ -1,7 +1,7 @@
 package org.example.interviewking.api.auth.infra.oauth.google;
 
 import org.example.interviewking.api.auth.dto.OAuthUserInfo;
-import org.example.interviewking.api.auth.model.OAuthProvider;
+import org.example.interviewking.api.auth.domain.OAuthProvider;
 
 public record GoogleUserInfo(
     String name,
