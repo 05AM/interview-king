@@ -1,0 +1,56 @@
+spring:
+  config:
+    import: classpath:api-secret.properties
+  datasource:
+    url: jdbc:mysql://localhost:3306/interviewking?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul&characterEncoding=UTF-8
+    username: root
+    password: 1234
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        show_sql: false
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  sql:
+    init:
+      mode: embedded
+
+  h2:
+    console:
+      enabled: true
+
+jwt:
+  secret-key: your-very-secure-and-long-secret-key-for-hs256-signing
+  #  access-expiration-time: 1800000       # 30분
+  access-expiration-time: 604800000
+  refresh-expiration-time: 604800000    # 1주
+
+oauth:
+  client:
+    google:
+      credentials:
+        client-id: ${GOOGLE_OAUTH_CLIENT_ID}
+        client-secret: ${GOOGLE_OAUTH_CLIENT_SECRET}
+        redirect-uri: http://localhost:3000/auth/callback
+#        redirect-uri: http://localhost:8080/oauth/callback
+      provider:
+        uri:
+          user-info: https://www.googleapis.com/oauth2/v2/userinfo
+          token: https://oauth2.googleapis.com/token
+
+openai:
+  api-key: ${OPENAI_API_KEY}
+  base-url: https://api.openai.com/v1
+  model: gpt-5.1
+#  model: gpt-5-mini
+
+classpath:
+  prompt:
+    interview:
+      system: "prompts/interview_system_prompt.txt"
+      user: "prompts/interview_user_prompt.txt"
