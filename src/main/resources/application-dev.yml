@@ -24,11 +24,6 @@ spring:
     console:
       enabled: true
 
-logging:
-  level:
-    org.hibernate.SQL: debug
-    org.hibernate.type.descriptor.sql.BasicBinder: trace
-
 jwt:
   secret-key: your-very-secure-and-long-secret-key-for-hs256-signing
   #  access-expiration-time: 1800000       # 30분
@@ -41,7 +36,8 @@ oauth:
       credentials:
         client-id: ${GOOGLE_OAUTH_CLIENT_ID}
         client-secret: ${GOOGLE_OAUTH_CLIENT_SECRET}
-        redirect-uri: http://localhost:8080/oauth/callback
+        redirect-uri: http://localhost:3000/auth/callback
+#        redirect-uri: http://localhost:8080/oauth/callback
       provider:
         uri:
           user-info: https://www.googleapis.com/oauth2/v2/userinfo
